@@ -6,8 +6,14 @@
             "name": "Data Preparation",
             "isOverview": false,
             "description": "To prepare raw data to a format suitable for further analysis",
-            "folderName": "{{timestamp}}-{{user.initials}}-data_preparation",
-            "command": "--no-input --directory use_case_templates/data_preparation --output-dir {{output-dir}} timestamp={{timestamp}} author_name={{user.name}} author_initials={{user.initials}} use_case_name=data_preparation",
+            "automaticArguments": {
+                "use_case_name": "data_preparation",
+                "author_name": "{{user.name}}",
+                "author_initials": "{{user.initials}}",
+                "timestamp": "{{timestamp}}"
+            },
+            "userArguments": {
+            },
             "files": [
                 {
                     "type": "board",
@@ -16,7 +22,7 @@
                 },
                 {
                     "type": "notebook",
-                    "path": "data_preparation.ipynb"
+                    "path": "data_preparation.ipynb",
                     "active": true
                 }
             ]

@@ -1,0 +1,4 @@
+pytest
+cookiecutter
+pydantic
+halerium-utilities
