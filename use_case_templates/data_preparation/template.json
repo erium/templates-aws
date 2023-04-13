@@ -26,6 +26,26 @@
                     "active": true
                 }
             ]
+        },
+        {
+            "name": "Data Quality Report",
+            "isOverview": false,
+            "description": "To generate a data quality assessment report",
+            "automaticArguments": {
+                "use_case_name": "data_quality_report",
+                "author_name": "{{user.name}}",
+                "author_initials": "{{user.initials}}",
+                "timestamp": "{{timestamp}}"
+            },
+            "userArguments": {
+            },
+            "files": [
+                {
+                    "type": "notebook",
+                    "path": "data_quality_report.ipynb",
+                    "active": true
+                }
+            ]
         }
     ]
 }
