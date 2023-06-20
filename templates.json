@@ -525,11 +525,11 @@
             "description": "To prepare raw data to a format suitable for further analysis",
             "templates": [
                 {
-                    "name": "Data Preparation",
+                    "name": "Data Merge",
                     "isOverview": false,
-                    "description": "To prepare raw data to a format suitable for further analysis",
+                    "description": "To merge and restructure raw data to a flat table",
                     "automaticArguments": {
-                        "use_case_name": "data_preparation",
+                        "use_case_name": "data_merge",
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
@@ -540,12 +540,38 @@
                     "files": [
                         {
                             "type": "board",
-                            "path": "data_preparation.board",
+                            "path": "data_merge.board",
                             "active": true
                         },
                         {
                             "type": "notebook",
-                            "path": "data_preparation.ipynb",
+                            "path": "data_merge.ipynb",
+                            "active": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Data Cleaning",
+                    "isOverview": false,
+                    "description": "To improve the quality of a (single & flat) dataset for further analysis",
+                    "automaticArguments": {
+                        "use_case_name": "data_cleaning",
+                        "author_name": "{{user.name}}",
+                        "author_initials": "{{user.initials}}",
+                        "timestamp": "{{timestamp}}",
+                        "source_directory": "use_case_templates/data_preparation",
+                        "target_directory": "{{directoryPath}}"
+                    },
+                    "userArguments": {},
+                    "files": [
+                        {
+                            "type": "board",
+                            "path": "data_cleaning.board",
+                            "active": true
+                        },
+                        {
+                            "type": "notebook",
+                            "path": "data_cleaning.ipynb",
                             "active": true
                         }
                     ]

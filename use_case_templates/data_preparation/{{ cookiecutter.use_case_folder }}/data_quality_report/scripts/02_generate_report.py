@@ -196,7 +196,7 @@ mdFile.new_line()
 mdFile.new_line(f'- Total number of rows: {N_rows}, thereof {round((N_rows - len(unusable_rows))/N_rows*100, 2)}% complete and usable.', color=c_neutral)
 mdFile.new_line(f'- Total number of columns: {N_columns}', color=c_neutral)
 if N_rows/N_columns <= t_row_column_ratio: 
-    mdFile.new_line(f'    WARNING: There are too few rows compared to the number of columns. Please use only a subset of columns in further machine learning projects and make sure you have at least as many rows as columns, better twice as many rows as columns.', color=c_medium)
+    mdFile.new_line(f'    WARNING: There are too few rows compared to the number of columns. Please use only a subset of columns in further machine learning projects and make sure you have at least as many rows as columns, better twice as many rows as columns. See section "3.2 Only keep specific columns" in the data_cleaning template.', color=c_medium)
 if len(duplicated_rows)>0:
     N_duplicated_rows = int(len([index for tuple in duplicated_rows for index in tuple])/2)
     mdFile.new_line(f'\n- WARNING: There are {N_duplicated_rows} duplicated rows. Please delete the duplicates. See [duplications](#duplications)', color=c_medium)
@@ -213,7 +213,7 @@ if data['time-series']:
         if len(correlation_shifts)>0:
             mdFile.new_line(f'\n- WARNING: A shift of correlations was detetcted. For more advice see [correlation shift](#correlation-shift)', color=c_medium)
         if timeliness[3] < t_regularity: 
-            mdFile.new_line(f'\n- WARNING: Data was not collected steadily, there have been multiple gaps. Please make sure the data is still applicable and does not miss important parts.', color=c_medium)
+            mdFile.new_line(f'\n- WARNING: Data was not collected steadily, there have been multiple gaps. Please make sure the data is still applicable and does not miss important parts. You might consider splitting the dataset and using only parts of it that have no gaps, see section "3.1 Use slice of dataframe" in the data_cleaning template', color=c_medium)
         if timeliness[4] < t_timeliness:
             mdFile.new_line(f'\n- WARNING: Data might not be up-to-date anymore. Please ensure that the data is still applicable, i.e. the process has not changed substantially since the data was collected.', color=c_medium)    
     else:
@@ -359,7 +359,7 @@ if full_report:
         mdFile.new_list(items)
         mdFile.new_paragraph("    This indicates that the behaviour of these columns with respect to each other has changed during the data collection time. "
                                 "It might also show that the overall process that generated the data has changed over time and the whole data set should be treated with care. "
-                                "You might want to split the data set into phases where no correlation shift appears.")
+                                "You might want to split the data set into phases where no correlation shift appears, see section '3. Separate Mixed Populations' in the data_cleaning template")
 
 ##################################################################################################################
 # Per Column 
@@ -520,7 +520,7 @@ for column_name in column_names:
                 comment = f"<font color={c_medium}> WARNING: The values's statistics change significantly over time. This might indicate that different parts of the data are not comparable often due to some external conditionas that changed unnoticed. Please see the figure below and treat this column with care, because different parts of the dataset might be not comparable and therefore should not be used together in machine learning applications. You might consider splitting the dataset and using only parts of it at a time."
                 hint_dict['use_slice_shift'] = True
             else:
-                comment = f"<font color={c_medium}> WARNING: The values's statistics change significantly over every timeframe. This might indicate that different parts of the data are not comparable often due to some external conditionas that changed unnoticed. Appearently no part of the dataset can be identified that has no shift, so please use this column only if you know the cause for the shift and how to handle it."
+                comment = f"<font color={c_medium}> WARNING: The values's statistics change significantly over etime. This might indicate that different parts of the data are not comparable often due to some external conditionas that changed unnoticed. Appearently no part of the dataset can be identified that has no shift, so please use this column only if you know the cause for the shift and how to handle it. You might consider splitting the dataset and using only parts of it at a time, see section '3. Separate Mixed Populations' in the data_cleaning template."
             list_of_strings.extend(['shift', value, comment])
             counter += 1
 
@@ -530,7 +530,7 @@ for column_name in column_names:
                 comment = f"<font color={c_medium}> WARNING: The values seem to jump. This might indicate that some circumstances have changed suddenly. If this is due to changed set-parameters everything is ok, but if it is due to external, untracked parameters make sure you do not mix up different external conditions in the further usage of the data. Please see the figure below together with the figures of the set values to judge whether the jumps are reasonable or not. In case not, please split the dataset into pieces that do not contain jumps and use only one of them for further machine learning applications."
                 hint_dict['use_slice_jumps'] = True
             else:
-                comment = f"<font color={c_medium}> WARNING: Every value seems to jump. This might indicate that some circumstances have changed suddenly. If this is due to changed set-parameters everything is ok, but if it is due to external, untracked parameters make sure you do not mix up different external conditions in the further usage of the data. Please see the figure below together with the figures of the set values to judge whether the jumps are reasonable or not. In case not, please split the dataset into pieces that do not contain jumps and use only one of them for further machine learning applications."
+                comment = f"<font color={c_medium}> WARNING: Every value seems to jump. This might indicate that some circumstances change suddenly. If this is due to changed set-parameters everything is ok, but if it is due to external, untracked parameters make sure you do not mix up different external conditions in the further usage of the data. Please see the figure below together with the figures of the set values to judge whether the jumps are reasonable or not. In case not, please split the dataset into pieces that do not contain jumps and use only one of them for further machine learning applications. See section '3.1 Use slice of dataframe' in the data_cleaning template."
             list_of_strings.extend(['jumps', value, comment])
             counter += 1
         
@@ -551,19 +551,19 @@ for column_name in column_names:
         for key, value in hint_dict.items():
             if value:
                 if key == 'convert_into_main_type_rows':
-                    mdFile.new_line(f"<font color={c_hint}> Hint: To convert all values for which this is possible into the main type use `df['{column_name}'] = df['{column_name}'].astype({col_data['mainType']}, errors='ignore')` [(learn more)](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.astype.html) </font>")
+                    mdFile.new_line(f"<font color={c_hint}> Hint: To convert all values for which this is possible into the main type use `df['{column_name}'] = df['{column_name}'].astype({col_data['mainType']}, errors='ignore')`. Also see section '3.3 Type handling' in the data_cleaning template. [(learn more)](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.astype.html) </font>")
                 if key == 'delete_non_main_type_rows':
-                    mdFile.new_line(f"<font color={c_hint}> Hint: To delete all rows with other types use `df.drop(df[df['{column_name}'].apply(lambda x : pd.isnull(x) or not isinstance(x, {col_data['mainType']}))].index, inplace=True)` [(learn more)](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop.html) </font>")
+                    mdFile.new_line(f"<font color={c_hint}> Hint: To delete all rows with other types use `df.drop(df[df['{column_name}'].apply(lambda x : pd.isnull(x) or not isinstance(x, {col_data['mainType']}))].index, inplace=True)`. Also see section '3.3 Type handling' in the data_cleaning template. [(learn more)](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop.html) </font>")
                 if key == 'delete_few_value_column':
-                    mdFile.new_line(f"<font color={c_hint}> Hint: To delete the column use `df.drop({column_name}, axis=1, inplace=True)` </font>")
+                    mdFile.new_line(f"<font color={c_hint}> Hint: To delete the column use `df.drop({column_name}, axis=1, inplace=True)`. Also see section '3.2 Only keep specific columns' in the data_cleaning template. </font>")
                 if key == 'delete_accumulated_value_rows':
-                    mdFile.new_line(f"<font color={c_hint}> Hint: To delete all rows with accumulated values use `df = df[df['{column_name}'].isin({list(set(col_data['accumulatedValues']))})==False]` [(learn more)](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.isin.html) </font>")
+                    mdFile.new_line(f"<font color={c_hint}> Hint: To delete all rows with accumulated values use `df = df[df['{column_name}'].isin({list(set(col_data['accumulatedValues']))})==False]`, ALso see section '3.5. Manually remove rows and columns' in the data_cleaning template. [(learn more)](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.isin.html) </font>")
                 if key == 'delete_outlier_rows':
-                    mdFile.new_line(f"<font color={c_hint}> Hint: To delete all rows with outlier values use `df = df[df['{column_name}'].isin({list(set(col_data['outlierValues']))})==False]` [(learn more)](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.isin.html) </font>")
+                    mdFile.new_line(f"<font color={c_hint}> Hint: To delete all rows with outlier values use `df = df[df['{column_name}'].isin({list(set(col_data['outlierValues']))})==False]`. Also see section '4.3 Outliers' in the data_cleaning template. [(learn more)](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.isin.html) </font>")
                 if key == 'use_slice_shift': # maybe suggest the largest part of the data which meets the no-shift-criterion
-                    mdFile.new_line(f"<font color={c_hint}> Hint: To extract a part from the data that contains no shifts use `df = df.iloc[{col_data['timeRole']['biggest_no_shift'][0][0]}:{col_data['timeRole']['biggest_no_shift'][0][1]}]` [(learn more)](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.iloc.html) </font>") 
+                    mdFile.new_line(f"<font color={c_hint}> Hint: To extract a part from the data that contains no shifts use `df = df.iloc[{col_data['timeRole']['biggest_no_shift'][0][0]}:{col_data['timeRole']['biggest_no_shift'][0][1]}]`. Also see section '3.1 Use slice of dataframe' in the data_cleaning template. [(learn more)](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.iloc.html) </font>") 
                 if key == 'use_slice_jumps': # maybe suggest the largest part of the data which meets the no-jump-criterion
-                    mdFile.new_line(f"<font color={c_hint}> Hint: To extract a part from the data that contains no jumps use `df = df.iloc[{col_data['timeRole']['biggest_no_jump'][0][0]}:{col_data['timeRole']['biggest_no_jump'][0][1]}]` [(learn more)](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.iloc.html) </font>")
+                    mdFile.new_line(f"<font color={c_hint}> Hint: To extract a part from the data that contains no jumps use `df = df.iloc[{col_data['timeRole']['biggest_no_jump'][0][0]}:{col_data['timeRole']['biggest_no_jump'][0][1]}]`. Also see section '3.1 Use slice of dataframe' in the data_cleaning template. [(learn more)](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.iloc.html) </font>")
 
         mdFile.new_line()
         mdFile.new_line('___')

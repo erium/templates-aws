@@ -34,41 +34,31 @@ class Plotter:
         plt.show()
     
 class Importer:
-    def import_data(filepaths, sheet, sep, datetime_col, join):
-        dfs = []
+    def import_data(filepath, datetime_col):
 
-        for filepath in filepaths:
-            filename, filetype = os.path.splitext(filepath)
-            if not filetype:
-                raise ValueError(filepath + " has missing extension")
+        _, filetype = os.path.splitext(filepath)
+        if not filetype:
+            raise ValueError(filepath + " has missing extension")
 
-            if filetype == '.csv':
-                df = pd.read_csv(filepath)
-            elif filetype == '.pkl':
-                df = pd.read_pickle(filepath)
-            elif filetype == '.xlsx':
-                df = pd.read_excel(open(filepath,'rb'), sheet_name=sheet)
-            elif filetype == '.zip':
-                df = pd.read_csv(filepath)
-            elif filetype == '.txt':
-                df = pd.read_csv(filepath, sep=sep, header=None)
-            elif filetype == '.json':
-                df = pd.read_json(filepath)
-            else:
-                raise ValueError(filepath + " has invalid/unsupported extension")
+        if filetype == '.csv':
+            df = pd.read_csv(filepath)
+        elif filetype == '.pkl':
+            df = pd.read_pickle(filepath)
+        elif filetype == '.xlsx':
+            df = pd.read_excel(open(filepath,'rb'))
+        elif filetype == '.zip':
+            df = pd.read_csv(filepath)
+        elif filetype == '.txt':
+            df = pd.read_csv(filepath, header=None)
+        elif filetype == '.json':
+            df = pd.read_json(filepath)
+        else:
+            raise ValueError(filepath + " has invalid/unsupported extension")
 
-            if datetime_col:
-                df[datetime_col] = pd.to_datetime(df[datetime_col], infer_datetime_format=True)
-                df = df.set_index(datetime_col)
+        if datetime_col:
+            df[datetime_col] = pd.to_datetime(df[datetime_col], infer_datetime_format=True)
+            df = df.set_index(datetime_col)
 
-            dfs.append(df)
-
-        if join == 'vertical':
-            df = pd.concat(dfs)
-        elif join == 'inner':
-            df = pd.concat(dfs, axis=1, join="inner")
-        elif join == 'outer':
-            df = pd.concat(dfs, axis=1, join="outer")
         return df
             
             
@@ -83,15 +73,35 @@ class PopulationSeparator:
                 populations[name] = df.iloc[index_range[0]: index_range[1]]
         return populations
 
+
+class ColumnPicker:
+    def keep_specific_columns(df, columns_to_keep):
+        if columns_to_keep == 'all':
+            df = df
+        else:
+            if not all([c in df.columns for c in columns_to_keep]):
+                raise ValueError(f'Some specified columns ({columns_to_keep}) are not among the dataframe columns ({df.columns}).')
+            else:
+                df =df[columns_to_keep]
+        return df
+   
+
 class Standardizer:
-    def standardize_datatype(df, columns, datatype):
-        datatype_dict = {}
-        for col in list(columns):
-            datatype_dict[col] = datatype
+    def standardize_datatype(df, column_types):
         try:
-            df = df.astype(datatype_dict)
+            df = df.astype(column_types)
         except Exception as e:
             print("Error:", e)
+        return df
+
+    def remove_invalid_types(df, type_dict):
+        # this method is slow and might be optimized later
+        to_be_removed_indices = []
+        for index, row in df.iterrows():
+            for c in type_dict.keys():
+                if not isinstance(row[c], type_dict[c]):
+                    to_be_removed_indices.append(index)
+        df = df.drop(to_be_removed_indices)
         return df
 
     def standardize_column_names(df, func):

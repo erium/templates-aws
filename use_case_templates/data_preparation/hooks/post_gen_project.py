@@ -5,7 +5,7 @@ from halerium_utilities import notebook
 
 # Select the specified template
 model_templates = '{{cookiecutter.use_case_slug}}'
-all_templates = ['data_preparation', 'data_quality_report']
+all_templates = ['data_merge', 'data_cleaning', 'data_quality_report']
 for template in all_templates:
     if template != model_templates:
         shutil.rmtree('./' + template)
