@@ -73,112 +73,25 @@
             ]
         },
         {
-            "name": "Hypothesis Testing",
-            "description": "To infer if the data at hand supports a certain hypothesis",
+            "name": "Chatbots",
+            "description": "Custom chatbots for questionnaires etc.",
             "templates": [
                 {
-                    "name": "Overview",
-                    "isOverview": true,
-                    "description": "Overview board for hypothesis testing templates",
-                    "automaticArguments": {
-                        "use_case_name": "hypothesis_testing_overview",
-                        "author_name": "{{user.name}}",
-                        "author_initials": "{{user.initials}}",
-                        "timestamp": "{{timestamp}}",
-                        "source_directory": "use_case_templates/hypothesis_testing",
-                        "target_directory": "{{directoryPath}}"
-                    },
-                    "userArguments": {},
-                    "files": [
-                        {
-                            "type": "board",
-                            "path": "hypothesis_testing_overview.board",
-                            "active": true
-                        }
-                    ]
-                },
-                {
-                    "name": "Classical Hypothesis Testing",
+                    "name": "Polybot",
                     "isOverview": false,
-                    "description": "To use statistical tests to infer if the data supports a certain hypothesis",
+                    "description": "Start a chatbot with a dedicated frontend. The bot supports various personalities.",
                     "automaticArguments": {
-                        "use_case_name": "classical_ht",
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "use_case_templates/hypothesis_testing",
+                        "source_directory": "chatbots/polybot",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
                     "files": [
                         {
                             "type": "board",
-                            "path": "classical_ht.board",
-                            "active": true
-                        },
-                        {
-                            "type": "notebook",
-                            "path": "classical_ht.ipynb",
-                            "active": true
-                        }
-                    ]
-                },
-                {
-                    "name": "Causal Hypothesis Testing",
-                    "isOverview": false,
-                    "description": "To model good fitting causal structures and obtain causal estimates",
-                    "automaticArguments": {
-                        "use_case_name": "causal",
-                        "author_name": "{{user.name}}",
-                        "author_initials": "{{user.initials}}",
-                        "timestamp": "{{timestamp}}",
-                        "source_directory": "use_case_templates/hypothesis_testing",
-                        "target_directory": "{{directoryPath}}"
-                    },
-                    "userArguments": {},
-                    "files": [
-                        {
-                            "type": "board",
-                            "path": "causal_structure.board",
-                            "active": true
-                        },
-                        {
-                            "type": "notebook",
-                            "path": "causal_structure.ipynb",
-                            "active": true
-                        },
-                        {
-                            "type": "board",
-                            "path": "causal_estimate.board"
-                        },
-                        {
-                            "type": "notebook",
-                            "path": "causal_estimate.ipynb"
-                        }
-                    ]
-                },
-                {
-                    "name": "Equation Hypothesis Testing",
-                    "isOverview": false,
-                    "description": "To test if a hypothesis in the form of an equation fits the data well",
-                    "automaticArguments": {
-                        "use_case_name": "equation",
-                        "author_name": "{{user.name}}",
-                        "author_initials": "{{user.initials}}",
-                        "timestamp": "{{timestamp}}",
-                        "source_directory": "use_case_templates/hypothesis_testing",
-                        "target_directory": "{{directoryPath}}"
-                    },
-                    "userArguments": {},
-                    "files": [
-                        {
-                            "type": "board",
-                            "path": "equation.board",
-                            "active": true
-                        },
-                        {
-                            "type": "notebook",
-                            "path": "equation.ipynb",
+                            "path": "polybot.board",
                             "active": true
                         }
                     ]
@@ -186,156 +99,121 @@
             ]
         },
         {
-            "name": "Outlier Detection",
-            "description": "To detect outliers in labelled and unlabelled datasets",
+            "name": "Image Generation Prompts",
+            "description": "Boards with Prompt-Trees for image generation.",
             "templates": [
                 {
-                    "name": "Overview",
-                    "isOverview": true,
-                    "description": "Overview board for outlier detection templates",
+                    "name": "Stable Diffusion Generator",
+                    "isOverview": false,
+                    "description": "Create prompts for Stable Diffusion",
                     "automaticArguments": {
-                        "use_case_name": "outlier_detection_overview",
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "use_case_templates/outlier_detection",
+                        "source_directory": "image_generation/stable_diffusion",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
-                    "files": [
-                        {
-                            "type": "board",
-                            "path": "outlier_detection_overview.board",
-                            "active": true
-                        }
-                    ]
+                    "files": []
+                }
+            ]
+        },
+        {
+            "name": "Generic Prompts",
+            "description": "Boards with Prompt-Trees for generic tasks.",
+            "templates": [
+                {
+                    "name": "Document Chatbot",
+                    "isOverview": false,
+                    "description": "Perform document-based inquiries, providing instant, accurate responses based on the content of specific documents.",
+                    "automaticArguments": {
+                        "author_name": "{{user.name}}",
+                        "author_initials": "{{user.initials}}",
+                        "timestamp": "{{timestamp}}",
+                        "source_directory": "generic/document_chatbot",
+                        "target_directory": "{{directoryPath}}"
+                    },
+                    "userArguments": {},
+                    "files": []
                 },
                 {
-                    "name": "Autoencoder",
+                    "name": "Meeting Report Generator",
                     "isOverview": false,
-                    "description": "To detect outliers by training an autoencoder on clean data and finding poorly reconstructed data",
+                    "description": "Efficiently capture, organize, and present key takeaways, decisions, and action items from meetings.",
                     "automaticArguments": {
-                        "use_case_name": "autoencoder",
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "use_case_templates/outlier_detection",
+                        "source_directory": "generic/meeting_report_generator",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
-                    "files": [
-                        {
-                            "type": "board",
-                            "path": "autoencoder.board",
-                            "active": true
-                        },
-                        {
-                            "type": "notebook",
-                            "path": "autoencoder.ipynb",
-                            "active": true
-                        }
-                    ]
+                    "files": []
                 },
                 {
-                    "name": "Bayesian Supervised",
+                    "name": "Bot vs Bot",
                     "isOverview": false,
-                    "description": "To train a Bayesian model on labelled outliers and use it to predict outliers in new data",
+                    "description": "Use two bots to complete a task.",
                     "automaticArguments": {
-                        "use_case_name": "bayesian_supervised",
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "use_case_templates/outlier_detection",
+                        "source_directory": "generic/bot_vs_bot",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
-                    "files": [
-                        {
-                            "type": "board",
-                            "path": "bayesian_supervised.board",
-                            "active": true
-                        },
-                        {
-                            "type": "notebook",
-                            "path": "bayesian_supervised.ipynb",
-                            "active": true
-                        }
-                    ]
+                    "files": []
                 },
                 {
-                    "name": "Bayesian Unsupervised",
+                    "name": "Blogpost with Image Generator",
                     "isOverview": false,
-                    "description": "To detect unlabelled outliers using a Bayesian model",
+                    "description": "Use Text- and Imagebots to generate a Blogpost on any topic.",
                     "automaticArguments": {
-                        "use_case_name": "bayesian_unsupervised",
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "use_case_templates/outlier_detection",
+                        "source_directory": "generic/blogpost_with_image",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
-                    "files": [
-                        {
-                            "type": "board",
-                            "path": "bayesian_unsupervised.board",
-                            "active": true
-                        },
-                        {
-                            "type": "notebook",
-                            "path": "bayesian_unsupervised.ipynb",
-                            "active": true
-                        }
-                    ]
+                    "files": []
                 },
                 {
-                    "name": "Supervised",
+                    "name": "Bot Generator",
                     "isOverview": false,
-                    "description": "To detect outliers by training models on labelled outliers and use them to predict outliers in new data",
+                    "description": "Generate a bot to complete a task.",
                     "automaticArguments": {
-                        "use_case_name": "supervised",
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "use_case_templates/outlier_detection",
+                        "source_directory": "generic/bot_generator",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
-                    "files": [
-                        {
-                            "type": "board",
-                            "path": "supervised.board",
-                            "active": true
-                        },
-                        {
-                            "type": "notebook",
-                            "path": "supervised.ipynb",
-                            "active": true
-                        }
-                    ]
-                },
+                    "files": []
+                }
+            ]
+        },
+        {
+            "name": "Enhanced Bots",
+            "description": "Bots enhanced by plugins and functions.",
+            "templates": [
                 {
-                    "name": "Unsupervised",
+                    "name": "Bots with Plugins",
                     "isOverview": false,
-                    "description": "To detect unlabelled outliers through clustering algorithms",
+                    "description": "Create boards in which ChatGPT has access to customizable functions such as code execution and file reading ",
                     "automaticArguments": {
-                        "use_case_name": "unsupervised",
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "use_case_templates/outlier_detection",
+                        "source_directory": "enhanced_bots/bots_with_plugins",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
                     "files": [
                         {
                             "type": "board",
-                            "path": "unsupervised.board",
-                            "active": true
-                        },
-                        {
-                            "type": "notebook",
-                            "path": "unsupervised.ipynb",
+                            "path": "START_FUNCTIONSERVER.board",
                             "active": true
                         }
                     ]
@@ -343,259 +221,64 @@
             ]
         },
         {
-            "name": "Prediction",
-            "description": "To predict an output based on input parameters provided",
+            "name": "Code Generation Prompts",
+            "description": "Boards with Prompt-Trees for code generation tasks.",
             "templates": [
                 {
-                    "name": "Overview",
-                    "isOverview": true,
-                    "description": "Overview board for prediction templates",
+                    "name": "Code Refactoring and Review",
+                    "isOverview": false,
+                    "description": "Refactor and Review existing code.",
                     "automaticArguments": {
-                        "use_case_name": "prediction_overview",
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "use_case_templates/prediction",
+                        "source_directory": "code_generation/code_refactoring_and_review",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
-                    "files": [
-                        {
-                            "type": "board",
-                            "path": "prediction_overview.board",
-                            "active": true
-                        }
-                    ]
+                    "files": []
                 },
                 {
-                    "name": "Regression",
+                    "name": "Code Comments and Documentation Generator",
                     "isOverview": false,
-                    "description": "To estimate the relationships between a dependent variable and one or more independent variables",
+                    "description": "Generate insightful code comments and comprehensive documentation.",
                     "automaticArguments": {
-                        "use_case_name": "regression",
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "use_case_templates/prediction",
+                        "source_directory": "code_generation/code_comments_and_documentation_generator",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
-                    "files": [
-                        {
-                            "type": "board",
-                            "path": "regression.board",
-                            "active": true
-                        },
-                        {
-                            "type": "notebook",
-                            "path": "regression.ipynb",
-                            "active": true
-                        }
-                    ]
+                    "files": []
                 },
                 {
-                    "name": "Simple Prediction",
+                    "name": "Interactive Python Coder",
                     "isOverview": false,
-                    "description": "To perform simple regression and classification with keras and scikit-learn models without parameter tuning and preprocessing",
+                    "description": "Generate, execute and debug Python code with a bot.",
                     "automaticArguments": {
-                        "use_case_name": "simple_prediction",
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "use_case_templates/prediction",
+                        "source_directory": "code_generation/python_coder",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
-                    "files": [
-                        {
-                            "type": "notebook",
-                            "path": "simple_prediction.ipynb",
-                            "active": true
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "Design of Experiments",
-            "description": "To design a task that studies the relationship between input and output variables",
-            "templates": [
-                {
-                    "name": "Overview",
-                    "isOverview": true,
-                    "description": "Overview board for design of experiments templates",
-                    "automaticArguments": {
-                        "use_case_name": "doe_overview",
-                        "author_name": "{{user.name}}",
-                        "author_initials": "{{user.initials}}",
-                        "timestamp": "{{timestamp}}",
-                        "source_directory": "use_case_templates/design_of_experiments",
-                        "target_directory": "{{directoryPath}}"
-                    },
-                    "userArguments": {},
-                    "files": [
-                        {
-                            "type": "board",
-                            "path": "doe_overview.board",
-                            "active": true
-                        }
-                    ]
+                    "files": []
                 },
                 {
-                    "name": "Bayesian Optimization",
+                    "name": "Code and Unit Tests Generator",
                     "isOverview": false,
-                    "description": "To optimize the parameters using a bayesian model",
+                    "description": "Generate foundational code structures and corresponding unit tests based on user-defined specifications.",
                     "automaticArguments": {
-                        "use_case_name": "bayesian_optimization",
                         "author_name": "{{user.name}}",
                         "author_initials": "{{user.initials}}",
                         "timestamp": "{{timestamp}}",
-                        "source_directory": "use_case_templates/design_of_experiments",
+                        "source_directory": "code_generation/code_and_unit_tests_generator",
                         "target_directory": "{{directoryPath}}"
                     },
                     "userArguments": {},
-                    "files": [
-                        {
-                            "type": "board",
-                            "path": "bayesian_optimization.board",
-                            "active": true
-                        },
-                        {
-                            "type": "notebook",
-                            "path": "bayesian_optimization.ipynb",
-                            "active": true
-                        }
-                    ]
-                },
-                {
-                    "name": "Bayesian Modelling",
-                    "isOverview": false,
-                    "description": "To estimate the parameters by modelling parametrized equations",
-                    "automaticArguments": {
-                        "use_case_name": "bayesian_modelling",
-                        "author_name": "{{user.name}}",
-                        "author_initials": "{{user.initials}}",
-                        "timestamp": "{{timestamp}}",
-                        "source_directory": "use_case_templates/design_of_experiments",
-                        "target_directory": "{{directoryPath}}"
-                    },
-                    "userArguments": {},
-                    "files": [
-                        {
-                            "type": "board",
-                            "path": "bayesian_modelling.board",
-                            "active": true
-                        },
-                        {
-                            "type": "notebook",
-                            "path": "bayesian_modelling.ipynb"
-                        }
-                    ]
-                },
-                {
-                    "name": "Classical DOE",
-                    "isOverview": false,
-                    "description": "To estimate the parameters if all trials have to be run in parallel",
-                    "automaticArguments": {
-                        "use_case_name": "classical_doe",
-                        "author_name": "{{user.name}}",
-                        "author_initials": "{{user.initials}}",
-                        "timestamp": "{{timestamp}}",
-                        "source_directory": "use_case_templates/design_of_experiments",
-                        "target_directory": "{{directoryPath}}"
-                    },
-                    "userArguments": {},
-                    "files": [
-                        {
-                            "type": "board",
-                            "path": "classical_doe.board",
-                            "active": true
-                        },
-                        {
-                            "type": "notebook",
-                            "path": "classical_doe.ipynb",
-                            "active": true
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "Data Preparation",
-            "description": "To prepare raw data to a format suitable for further analysis",
-            "templates": [
-                {
-                    "name": "Data Merge",
-                    "isOverview": false,
-                    "description": "To merge and restructure raw data to a flat table",
-                    "automaticArguments": {
-                        "use_case_name": "data_merge",
-                        "author_name": "{{user.name}}",
-                        "author_initials": "{{user.initials}}",
-                        "timestamp": "{{timestamp}}",
-                        "source_directory": "use_case_templates/data_preparation",
-                        "target_directory": "{{directoryPath}}"
-                    },
-                    "userArguments": {},
-                    "files": [
-                        {
-                            "type": "board",
-                            "path": "data_merge.board",
-                            "active": true
-                        },
-                        {
-                            "type": "notebook",
-                            "path": "data_merge.ipynb",
-                            "active": true
-                        }
-                    ]
-                },
-                {
-                    "name": "Data Cleaning",
-                    "isOverview": false,
-                    "description": "To improve the quality of a (single & flat) dataset for further analysis",
-                    "automaticArguments": {
-                        "use_case_name": "data_cleaning",
-                        "author_name": "{{user.name}}",
-                        "author_initials": "{{user.initials}}",
-                        "timestamp": "{{timestamp}}",
-                        "source_directory": "use_case_templates/data_preparation",
-                        "target_directory": "{{directoryPath}}"
-                    },
-                    "userArguments": {},
-                    "files": [
-                        {
-                            "type": "board",
-                            "path": "data_cleaning.board",
-                            "active": true
-                        },
-                        {
-                            "type": "notebook",
-                            "path": "data_cleaning.ipynb",
-                            "active": true
-                        }
-                    ]
-                },
-                {
-                    "name": "Data Quality Report",
-                    "isOverview": false,
-                    "description": "To generate a data quality assessment report",
-                    "automaticArguments": {
-                        "use_case_name": "data_quality_report",
-                        "author_name": "{{user.name}}",
-                        "author_initials": "{{user.initials}}",
-                        "timestamp": "{{timestamp}}",
-                        "source_directory": "use_case_templates/data_preparation",
-                        "target_directory": "{{directoryPath}}"
-                    },
-                    "userArguments": {},
-                    "files": [
-                        {
-                            "type": "notebook",
-                            "path": "data_quality_report.ipynb",
-                            "active": true
-                        }
-                    ]
+                    "files": []
                 }
             ]
         }
