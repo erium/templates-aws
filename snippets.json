@@ -1,0 +1,15 @@
+{
+  "categories": [
+    {
+      "name": "Test Category",
+      "description": "Category for testing",
+      "snippets": [
+        {
+          "name": "Test Snippet",
+          "description": "This is a test snippet",
+          "file": "test-snippet.json"
+        }
+      ]
+    }
+  ]
+}
