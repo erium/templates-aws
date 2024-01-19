@@ -7,7 +7,7 @@
         {
           "name": "Test Snippet",
           "description": "This is a test snippet",
-          "file": "test-snippet.json"
+          "file": "test-snippet.board"
         }
       ]
     }
