@@ -7,7 +7,7 @@
         {
           "name": "Test Snippet",
           "description": "This is a test snippet",
-          "file": "test-snippet.board"
+          "path": "/snippets/test/category/test-snippet.board"
         }
       ]
     }
